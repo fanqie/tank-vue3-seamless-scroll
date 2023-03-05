@@ -1,0 +1,22 @@
+{
+  "name": "tank-vue3-seamless-scroll",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "exports": {
+    "./src": "**/*.vue"
+  },
+  "dependencies": {
+    "d3-timer": "^3.0.1",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.1.0"
+  }
+}

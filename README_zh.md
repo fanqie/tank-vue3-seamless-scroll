@@ -1,32 +1,33 @@
-English | [中文](./README_zh.md)
+[English](README.md) | 中文
 
 # tank-vue3-seamless-scroll
 
+
 ## features
 
-* This is a high-performance seamless scrolling plug-in
-* Event monitoring will not fail
+* 这是一个高性能的无缝滚动插件
+* 事件监听不会失效
 
 
-## preview
+# 预览
 
 ![](demo.gif)
 
-## Quick Start
+## 快速开始
 
-### install
+### 安装
 
 ```shell
 npm install --save tank-vue3-seamless-scroll
 ```
 
-### import
+### 导入
 
 ```js
 import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 ```
 
-### use component
+### 使用组件
 
 ```html
 
@@ -43,21 +44,21 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 
 #### step-length
 
-* desc：Pixel height moved per second
-* default: 60 (px/second)
-* type: Number
+* 描述：每秒移动像素高度
+* 默认值: 60 (px/秒)
+* 类型: Number
 
 #### reverse
 
-* desc：The animation will play in reverse scrolling
-* default: false
-* type: Boolean
+* 描述：动画将反向滚动播放
+* 默认值: false
+* 类型: Boolean
 
 #### debug
 
-* desc：Whether to display debugging information
-* default: false
-* type: Boolean
+* 描述：是否显示调试信息
+* 默认值: false
+* 类型: Boolean
 
 
 
