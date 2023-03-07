@@ -36,7 +36,7 @@ const count = ref(0)
 .demo div {
   padding: 10px 20px;
   background-color: #05ad01;
-  margin: 5px 10px;
+  margin: 5px 10px 0px 0px;
   text-align: center;
   border-radius: 5px;
   box-shadow:  0px 5px 20px  rgba(0,0,0,.1);

@@ -9,7 +9,7 @@
     </div>
     <div ref="ref_warp" class="warp">
       <template v-for="i in loopCount.length" :key="'ss_'+i">
-        <div ref="ref_warpLine" >
+        <div ref="ref_warpLine" class="warpLine">
           <slot name="default"></slot>
         </div>
       </template>
@@ -53,7 +53,7 @@ const createTimer = (handle) => new Promise((resolve, reject) => {
     } catch (err) {
       reject(err)
     }
-  },1000/32))
+  }, 1000 / 32))
 })
 const getTime = () => new Date().getTime()
 const val = ref()
@@ -61,23 +61,24 @@ const currentFps = ref(64)
 onMounted(() => {
 
       nextTick(() => {
-        parentHeight.value = ref_tank_seamless_scroll.value.parentElement.clientHeight
+        parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
 
         let lastTime = getTime()
 
-        const warpLineHeight = ref_warpLine.value[0].clientHeight;
+        const warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
         let lastY = -warpLineHeight;
         let translateY = -warpLineHeight
         loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
         createTimer(() => {
-          const limitHeight = prop.reverse ? -parentHeight.value * 0.5 : -parentHeight.value*2
+          const limitHeight = prop.reverse ? -warpLineHeight * (loopCount.value.length / 3) : -warpLineHeight * (loopCount.value.length / 3 * 2)
           const currentTime = getTime()
           currentFps.value = Math.ceil(1000 / (currentTime - lastTime))
           const len = (currentTime - lastTime) * (prop.stepLength / 1000)
           lastTime = currentTime
           translateY += (prop.reverse ? 1 : -1) * len
           if (prop.reverse) {
-            translateY = translateY > limitHeight ? -(Math.ceil(parentHeight.value / warpLineHeight) * warpLineHeight + Math.abs(translateY % warpLineHeight)) : translateY
+            translateY = translateY > limitHeight ? -(warpLineHeight + Math.abs(translateY % warpLineHeight)) : translateY
+            //-(warpLineHeight + Math.abs(translateY % warpLineHeight)) : translateY
 
           } else {
             translateY = translateY < limitHeight ?
@@ -106,8 +107,17 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
-.warp {
+.tank_seamless_scroll, .warpLine, .warp {
+  padding: 0;
+  margin: 0;
   transition: 0s;
+  overflow: hidden;
+  /*border-bottom: transparent 1px solid; !* key code *!*/
+  /*box-sizing: border-box;*/
+}
+
+.warpLine {
+
 }
 
 .debugger {
