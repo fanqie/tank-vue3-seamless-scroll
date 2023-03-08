@@ -1,5 +1,5 @@
 <template>
-  <div style="height:300px;">
+  <div style="height:100px;">
     <tank-seamless-scroll :step-length="stepLength" :debug="debug" :reverse="reverse">
       <div class="demo">
         <div v-for="(v,i) in count" :key="i">value:{{v}},key:{{ i }}</div>
@@ -27,15 +27,7 @@ const prop = defineProps({
   }
 })
 const count = ref([0, 0])
-const timer = 0
-onMounted(() => {
-  setInterval(() => {
-    count.value=    count.value.concat(["append","append","append"])
-  }, 5000)
-})
-onUnmounted(() => {
-  clearInterval(timer)
-})
+
 </script>
 <style scoped>
 .demo {
@@ -44,13 +36,13 @@ onUnmounted(() => {
 
 .demo div {
   padding: 10px 20px;
-  background-color: #800000;
+  background-color: #ffea5e;
   margin: 5px 10px 0px 0px;
   text-align: center;
   border-radius: 5px;
 }
 
 .demo div:nth-child(2n) {
-  background-color: #ff4673;
+  background-color: #ff6625;
 }
 </style>

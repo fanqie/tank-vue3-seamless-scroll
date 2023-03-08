@@ -42,18 +42,19 @@ const prop = defineProps({
   },
 })
 let t = null
+let tWatch = null
 const ref_tank_seamless_scroll = ref(null)
 const ref_warpLine = ref(null)
 const ref_warp = ref(null)
 let parentHeight = ref(0)
-const createTimer = (handle) => new Promise((resolve, reject) => {
+const createTimer = (handle,fps=32) => new Promise((resolve, reject) => {
   resolve(timer(() => {
     try {
       handle()
     } catch (err) {
       reject(err)
     }
-  }, 1000 / 32))
+  }, 1000 / fps))
 })
 const getTime = () => new Date().getTime()
 const val = ref()
@@ -65,11 +66,13 @@ onMounted(() => {
 
         let lastTime = getTime()
 
-        const warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
+        let warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
         let lastY = -warpLineHeight;
         let translateY = -warpLineHeight
         loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
         createTimer(() => {
+
+
           const limitHeight = prop.reverse ? -warpLineHeight * (loopCount.value.length / 3) : -warpLineHeight * (loopCount.value.length / 3 * 2)
           const currentTime = getTime()
           currentFps.value = Math.ceil(1000 / (currentTime - lastTime))
@@ -93,11 +96,21 @@ onMounted(() => {
         }).catch(err => {
           console.error(err)
         })
+       createTimer(()=>{
+         parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
+         warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
+         loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
+       }).then((timer) => {
+         tWatch = timer
+       }).catch(err => {
+         console.error(err)
+       })
       })
     }
 )
 onUnmounted(() => {
   t?.stop()
+  tWatch?.stop()
 })
 </script>
 
