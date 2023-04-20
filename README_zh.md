@@ -8,11 +8,15 @@
 * 这是一个高性能的无缝滚动插件
 * 事件监听不会失效
 
+## 警告
+如果您打算对大量数据使用此插件，我们未做任何vue第三方组件针对性内存、cpu的虚拟优化，请谨慎选择
 
 # 预览
 
-![](demo.gif)
+[![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
 
+
+[在线演示](./dist/index.html)
 ## 快速开始
 
 ### 安装

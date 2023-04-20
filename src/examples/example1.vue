@@ -1,9 +1,8 @@
 <template>
-  <div style="height:300px;">
+  <div class="demo" :style="{height:`${height}px`}">
+    <h2 v-if="title">{{title}}</h2>
     <tank-seamless-scroll :step-length="stepLength" :debug="debug" :reverse="reverse">
-      <div class="demo">
-        <div v-for="(v,i) in count" :key="i">value:{{v}},key:{{ i }}</div>
-      </div>
+      <div v-for="(v,i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
     </tank-seamless-scroll>
   </div>
 
@@ -21,16 +20,26 @@ const prop = defineProps({
     type: Boolean,
     default: false
   },
+  height: {
+    type: Number,
+    default: 200
+  },
   debug: {
     type: Boolean,
     default: false
+  },
+  title: {
+    type: String,
+    default: ""
   }
+
 })
-const count = ref([0, 0])
+const count = ref(new Array(10).fill(null))
 const timer = 0
 onMounted(() => {
   setInterval(() => {
-    count.value=    count.value.concat(["append","append","append"])
+    //append data
+    count.value = count.value.concat([null, null, null])
   }, 5000)
 })
 onUnmounted(() => {
@@ -38,14 +47,19 @@ onUnmounted(() => {
 })
 </script>
 <style scoped>
+h2{
+  color: #01092c;
+  text-align: center;
+}
 .demo {
   color: #fff;
 }
 
 .demo div {
-  padding: 10px 20px;
+  padding: 10px 0px;
   background-color: #800000;
-  margin: 5px 10px 0px 0px;
+  margin: 5px;
+  box-sizing: border-box;
   text-align: center;
   border-radius: 5px;
 }

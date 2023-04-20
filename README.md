@@ -7,11 +7,13 @@ English | [中文](./README_zh.md)
 * This is a high-performance seamless scrolling plug-in
 * Event monitoring will not fail
 
+## Warning
+If you plan to use this plugin for a large amount of data, Please choose carefully,we  not done any virtual optimization for targeted memory and CPU of Vue third-party components.
 
 ## preview
 
-![](demo.gif)
-
+[![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
+[demo online](./dist/index.html)
 ## Quick Start
 
 ### install

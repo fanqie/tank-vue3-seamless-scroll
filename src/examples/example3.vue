@@ -1,9 +1,8 @@
 <template>
-  <div style="height:100px;">
+  <div class="demo" :style="{height:`${height}px`}">
+    <h2 v-if="title">{{title}}</h2>
     <tank-seamless-scroll :step-length="stepLength" :debug="debug" :reverse="reverse">
-      <div class="demo">
-        <div v-for="(v,i) in count" :key="i">value:{{v}},key:{{ i }}</div>
-      </div>
+      <div v-for="(v,i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
     </tank-seamless-scroll>
   </div>
 
@@ -24,20 +23,35 @@ const prop = defineProps({
   debug: {
     type: Boolean,
     default: false
-  }
+  },
+  height: {
+    type: Number,
+    default: 200
+  },
+  title: {
+    type: String,
+    default: ""
+  },
 })
-const count = ref([0, 0])
+const count = ref(new Array(2000).fill(null))
 
 </script>
 <style scoped>
+h2{
+  color: #01092c;
+  text-align: center;
+}
 .demo {
   color: #fff;
+  text-shadow: black;
+  height: 100px;
 }
 
 .demo div {
-  padding: 10px 20px;
+  padding: 10px 0px;
   background-color: #ffea5e;
-  margin: 5px 10px 0px 0px;
+  margin: 5px;
+  box-sizing: border-box;
   text-align: center;
   border-radius: 5px;
 }
