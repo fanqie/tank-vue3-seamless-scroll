@@ -13,7 +13,7 @@ If you plan to use this plugin for a large amount of data, Please choose careful
 ## preview
 Click on the image to play the animation
 [![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
-[demo online](https://curry-trooper.github.io/tank-vue3-seamless-scroll/dist/index.html)
+[demo online](https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html)
 ## Quick Start
 
 ### install
