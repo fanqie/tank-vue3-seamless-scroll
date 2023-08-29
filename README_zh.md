@@ -17,7 +17,7 @@
 [![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
 
 
-[在线演示](https://curry-trooper.github.io/tank-vue3-seamless-scroll/dist/index.html)
+[在线演示](https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html)
 ## 快速开始
 
 ### 安装
