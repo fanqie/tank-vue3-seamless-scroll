@@ -1,4 +1,5 @@
 <template>
+
   <div ref="ref_tank_seamless_scroll" class="tank_seamless_scroll" :style="{height: parentHeight+'px'}">
     <div class="debugger" v-if="debug">
       copyCount:{{ loopCount.length }}
@@ -9,9 +10,11 @@
     </div>
     <div ref="ref_warp" class="warp">
       <template v-for="i in loopCount.length" :key="'ss_'+i">
-        <div ref="ref_warpLine" class="warpLine">
-          <slot name="default"></slot>
-        </div>
+        <keep-alive>
+          <div ref="ref_warpLine" class="warpLine" v-if="!hideItemsIndex.includes(i)">
+            <slot name="default"></slot>
+          </div>
+        </keep-alive>
       </template>
     </div>
   </div>
@@ -70,13 +73,15 @@ const onPlay = (evt) => {
   animation = true
   lastTime = getTime()
 }
+const hideItemsIndex = ref([])
 onMounted(() => {
 
       nextTick(() => {
 
         ref_tank_seamless_scroll.value.addEventListener("mouseover", onStop)
         ref_tank_seamless_scroll.value.addEventListener("mouseout", onPlay)
-        parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
+        const parentElementRect = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect()
+        parentHeight.value = parentElementRect.height
         let warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
         let lastY = -warpLineHeight;
         let translateY = -warpLineHeight
@@ -103,6 +108,23 @@ onMounted(() => {
           val.value = translateY
           ref_warp.value.style.setProperty("transform", `translate3d(0px ,${translateY}px,0px)`)
           lastY = translateY
+          const hideItemsIndex = []
+
+
+          //用for循环遍历判断ref_warpLine.value，数组中的元素是否在可视区域内，只判断x和y
+          ref_warpLine.value.forEach((item, i) => {
+            let currenRect = ref_warpLine.value[i].getBoundingClientRect()
+            let parentElementRect = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect()
+            if (currenRect.y + currenRect.height < parentElementRect.y || currenRect.y > parentElementRect.y + parentElementRect.height) {
+              hideItemsIndex.push(i)
+            } else {
+              hideItemsIndex.splice(hideItemsIndex.value.indexOf(i), 1)
+            }
+          })
+
+          hideItemsIndex.value = hideItemsIndex;
+
+
         }).then((timer) => {
           t = timer
         }).catch(err => {

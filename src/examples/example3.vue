@@ -33,7 +33,7 @@ const prop = defineProps({
     default: ""
   },
 })
-const count = ref(new Array(2000).fill(null))
+const count = ref(new Array(200).fill(null))
 
 </script>
 <style scoped>
