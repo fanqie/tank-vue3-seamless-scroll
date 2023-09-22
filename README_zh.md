@@ -66,4 +66,7 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 * 类型: Boolean
 
 
-
+#### pauseOnHover:
+* desc：鼠标悬停时是否暂停
+* default: true
+* type: Boolean

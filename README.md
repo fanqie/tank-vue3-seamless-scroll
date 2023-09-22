@@ -62,4 +62,7 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 * type: Boolean
 
 
-
+#### pauseOnHover: 
+* desc：Whether to pause when the mouse hovers
+* default: true
+* type: Boolean

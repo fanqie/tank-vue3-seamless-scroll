@@ -18,7 +18,8 @@ import ExampleVirtual from './examples/example-virtual.vue'
       <example2 :step-length="15" :debug="true" :height="550" title="↓↓↓ debug  ↓↓↓"/>
       <example3 :step-length="200" :debug="false" :height="260" title="↓↓↓ many row  ↓↓↓"/>
       <example1 :step-length="120" :debug="false" :height="450" title="↓↓↓ append  ↓↓↓"/>
-<!--      <ExampleVirtual :step-length="120" :debug="false" :height="450" title="↓↓↓ virtual ↓↓↓"/>-->
+      <!--    currently not supported -->
+      <!--      <ExampleVirtual :step-length="120" :debug="false" :height="450" title="↓↓↓ virtual ↓↓↓"/>-->
     </div>
   </div>
 </template>

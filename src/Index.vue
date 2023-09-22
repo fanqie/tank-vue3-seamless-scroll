@@ -40,6 +40,10 @@ const prop = defineProps({
     type: Number,
     default: 32
   },
+  pauseOnHover: {
+    type: Boolean,
+    default: true
+  },
 })
 let t = null
 let tWatch = null
@@ -47,7 +51,7 @@ const ref_tank_seamless_scroll = ref(null)
 const ref_warpLine = ref(null)
 const ref_warp = ref(null)
 let parentHeight = ref(0)
-const createTimer = (handle,fps=32) => new Promise((resolve, reject) => {
+const createTimer = (handle, fps = 32) => new Promise((resolve, reject) => {
   resolve(timer(() => {
     try {
       handle()
@@ -58,21 +62,29 @@ const createTimer = (handle,fps=32) => new Promise((resolve, reject) => {
 })
 const getTime = () => new Date().getTime()
 const val = ref()
-const currentFps = ref(64)
+const currentFps = ref(60)
+let animation = true
+let lastTime = getTime()
+const onStop = (evt) => animation = false
+const onPlay = (evt) => {
+  animation = true
+  lastTime = getTime()
+}
 onMounted(() => {
 
       nextTick(() => {
+
+        ref_tank_seamless_scroll.value.addEventListener("mouseover", onStop)
+        ref_tank_seamless_scroll.value.addEventListener("mouseout", onPlay)
         parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
-
-        let lastTime = getTime()
-
         let warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
         let lastY = -warpLineHeight;
         let translateY = -warpLineHeight
         loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
         createTimer(() => {
-
-
+          if (!animation && prop.pauseOnHover) {
+            return;
+          }
           const limitHeight = prop.reverse ? -warpLineHeight * (loopCount.value.length / 3) : -warpLineHeight * (loopCount.value.length / 3 * 2)
           const currentTime = getTime()
           currentFps.value = Math.ceil(1000 / (currentTime - lastTime))
@@ -96,21 +108,23 @@ onMounted(() => {
         }).catch(err => {
           console.error(err)
         })
-       createTimer(()=>{
-         parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
-         warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
-         loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
-       }).then((timer) => {
-         tWatch = timer
-       }).catch(err => {
-         console.error(err)
-       })
+        createTimer(() => {
+          parentHeight.value = ref_tank_seamless_scroll.value.parentElement.getBoundingClientRect().height
+          warpLineHeight = ref_warpLine.value[0].getBoundingClientRect().height;
+          loopCount.value = new Array(Math.ceil(parentHeight.value / warpLineHeight) * 3)
+        }).then((timer) => {
+          tWatch = timer
+        }).catch(err => {
+          console.error(err)
+        })
       })
     }
 )
 onUnmounted(() => {
   t?.stop()
   tWatch?.stop()
+  ref_tank_seamless_scroll.value.removeEventListener("mouseover", onStop)
+  ref_tank_seamless_scroll.value.removeEventListener("mouseout", onPlay)
 })
 </script>
 
