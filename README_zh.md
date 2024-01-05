@@ -2,22 +2,28 @@
 
 # tank-vue3-seamless-scroll
 
-
 ## features
 
 * 这是一个高性能的无缝滚动插件
 * 事件监听不会失效
 
 ## 警告
+
 如果您打算对大量数据使用此插件，我们未做任何vue第三方组件针对性内存、cpu的虚拟优化，请谨慎选择
 
+## 运行环境
+
+* vue3
+* nodejs 14.15.0+
+
 # 预览
+
 点击图片播放动画
 
 [![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
 
-
 [在线演示](https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html)
+
 ## 快速开始
 
 ### 安装
@@ -65,8 +71,8 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 * 默认值: false
 * 类型: Boolean
 
-
 #### pauseOnHover:
+
 * desc：鼠标悬停时是否暂停
 * default: true
 * type: Boolean
