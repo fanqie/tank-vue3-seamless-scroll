@@ -49,7 +49,7 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 <div style="height:300px;">
     <tank-seamless-scroll :step-length="25" :debug="true" :reverse="false">
         <div class="demo">
-            <div v-for="i in 2" :key="i">测试{{ i }}</div>
+            <div v-for="i in 2" :key="i">test{{ i }}</div>
         </div>
     </tank-seamless-scroll>
 </div>

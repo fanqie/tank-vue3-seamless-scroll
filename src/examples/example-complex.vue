@@ -67,7 +67,7 @@ onMounted(() => {
     tags: ['vue', 'scroll', 'virtual'].slice(0, (i % 3) + 1)
   }))
 })
-const code = `<tank-seamless-scroll \n  :step-length=\"stepLength\" \n  :debug=\"debug\" \n  :reverse=\"reverse\"\n  :pause-on-hover=\"true\"\n  :virtual=\"true\"\n  :data=\"listData\"\n  :item-height=\"56\"\n  :buffer=\"3\"\n>\n  <template #item=\"{ item, index }\">\n    <ComplexItem :item=\"item\" :index=\"index\" />\n  </template>\n</tank-seamless-scroll>`
+const code = `<tank-seamless-scroll \n  :step-length=\"120\" \n  :debug=\"true\" \n  :reverse=\"true\"\n  :pause-on-hover=\"true\"\n  :virtual=\"true\"\n  :data=\"listData\"\n  :item-height=\"56\"\n  :buffer=\"3\"\n>\n  <template #item=\"{ item, index }\">\n    <ComplexItem :item=\"item\" :index=\"index\" />\n  </template>\n</tank-seamless-scroll>`
 </script>
 
 <style scoped>

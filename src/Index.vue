@@ -326,7 +326,11 @@ const handleMouseLeave = () => {
       // 从保存的位置继续，避免跳动
       const totalHeight = virtualTotalHeight.value
       if (totalHeight > 0) {
-        const progress = pausedOffset / totalHeight
+        let progress = pausedOffset / totalHeight
+        // 反向滚动时，进度需要反转
+        if (prop.reverse) {
+          progress = 1 - progress
+        }
         animationStartTime = performance.now() - progress * animationDuration.value * 1000
       }
       virtualRafId = requestAnimationFrame(updateVisibleRange)

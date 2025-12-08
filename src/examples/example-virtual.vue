@@ -75,7 +75,7 @@ onMounted(() => {
 // 生成大量数据
 let listData = ref([])
 const demoTab = ref('preview')
-const code = `<tank-seamless-scroll\n  :step-length=\"stepLength\"\n  :debug=\"debug\"\n  :reverse=\"reverse\"\n  :pause-on-hover=\"true\"\n  :virtual=\"true\"\n  :data=\"listData\"\n  :item-height=\"40\"\n  :buffer=\"5\"\n>\n  <template #item=\"{ item, index }\">\n    <div class=\"virtual-row demo-item\">\n      {{ item.text }} (index: {{ index }})\n    </div>\n  </template>\n</tank-seamless-scroll>`
+const code = `<tank-seamless-scroll\n  :step-length=\"1000\"\n  :debug=\"true\"\n  :reverse=\"false\"\n  :pause-on-hover=\"true\"\n  :virtual=\"true\"\n  :data=\"listData\"\n  :item-height=\"40\"\n  :buffer=\"5\"\n>\n  <template #item=\"{ item, index }\">\n    <div class=\"virtual-row demo-item\">\n      {{ item.text }} (index: {{ index }})\n    </div>\n  </template>\n</tank-seamless-scroll>`
 </script>
 
 <style scoped>

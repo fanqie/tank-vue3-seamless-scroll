@@ -49,7 +49,7 @@ const prop = defineProps({
 })
 const count = ref(new Array(200).fill(null))
 const demoTab = ref('preview')
-const code = `<tank-seamless-scroll :step-length=\"stepLength\" :debug=\"debug\" :reverse=\"reverse\">\n  <div v-for=\"(v,i) in count\" :key=\"i\" class=\"demo-item\">value:{{ v }},key:{{ i }}</div>\n</tank-seamless-scroll>`
+const code = `<tank-seamless-scroll :step-length=\"200\" :debug=\"debug\" :reverse=\"false\">\n  <div v-for=\"(v,i) in count\" :key=\"i\" class=\"demo-item\">value:{{ v }},key:{{ i }}</div>\n</tank-seamless-scroll>`
 
 </script>
 <style scoped>

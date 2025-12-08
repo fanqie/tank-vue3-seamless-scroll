@@ -50,7 +50,7 @@ const prop = defineProps({
 })
 const count =  ref(new Array(5).fill(null))
 const demoTab = ref('preview')
-const code = `<tank-seamless-scroll :step-length="stepLength" :debug="debug" :reverse="reverse">
+const code = `<tank-seamless-scroll :step-length="15" :debug="true" :reverse="false">
   <div v-for=\"i in 6\" :key=\"i\" class=\"demo-item\">test{{ i }}</div>
 </tank-seamless-scroll>`
 </script>

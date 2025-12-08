@@ -24,7 +24,29 @@
 import {ref, onMounted, onUnmounted} from 'vue'
 import TankSeamlessScroll from "../Index.vue"
 import CodeShow from "../components/codeShow.vue"
-const code=`<tank-seamless-scroll :step-length=\"stepLength\" :debug=\"debug\" :reverse=\"reverse\">\n  <div v-for=\"(v,i) in count\" :key=\"i\" class=\"demo-item\">value:{{ v }},key:{{ i }}</div>\n</tank-seamless-scroll>`
+const code=`<template>
+  <tank-seamless-scroll :step-length="32" :debug="false" :reverse="false">
+    <div v-for="(v,i) in count" :key="i" class="demo-item">value:{{ v }},key:{{ i }}</div>
+  </tank-seamless-scroll>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const count = ref(new Array(10).fill(null))
+let timer = null
+
+onMounted(() => {
+  timer = setInterval(() => {
+    // Dynamic append data
+    count.value = count.value.concat([null, null, null])
+  }, 5000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
+<\/script>`
 const prop = defineProps({
   stepLength: {
     type: Number,
