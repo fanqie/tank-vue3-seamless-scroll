@@ -2,25 +2,31 @@ English | [中文](./README_zh.md)
 
 # tank-vue3-seamless-scroll
 
-## features
+> **Version 2.0** - Now powered by CSS Keyframes! 🚀
 
-* This is a high-performance seamless scrolling plug-in
-* Event monitoring will not fail
+## What's New in V2.0
 
-## Warning
+- ✅ **CSS-based Animation**: Native CSS keyframes for buttery smooth scrolling
+- ✅ **Virtual Scrolling**: Handle 100,000+ items with ease
+- ✅ **GPU Accelerated**: Hardware-accelerated transforms
+- ✅ **Zero Dependencies**: No external libraries required
+- ✅ **100% API Compatible**: Drop-in replacement for v1.x
+- ✅ **Smart Rendering**: Only renders visible content with `content-visibility`
 
-If you plan to use this plugin for a large amount of data, Please choose carefully,we not done any virtual optimization
-for targeted memory and CPU of Vue third-party components.
+## Features
 
-## engine
-* vue3
-* nodejs 14.15.0+
+* 🎯 High-performance seamless scrolling
+* 🔄 Infinite loop animation
+* ⏸️ Pause on hover
+* 🔃 Reverse direction support
+* 📊 Virtual scrolling for massive datasets
+* 🐛 Built-in debug mode
 
-## preview
+## Requirements
 
-Click on the image to play the animation
-[![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
-[demo online](https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html)
+* Vue 3.x
+* Node.js 14.15.0+
+* Modern browser with CSS Keyframes support
 
 ## Quick Start
 
@@ -49,28 +55,35 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 </div>
 ```
 
-### api
+### API Reference
 
-#### step-length
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `step-length` | Number | 60 | Scroll speed in pixels per second |
+| `reverse` | Boolean | false | Reverse scrolling direction |
+| `debug` | Boolean | false | Show debug overlay |
+| `pauseOnHover` | Boolean | true | Pause animation on mouse hover |
+| `virtual` | Boolean | false | 🆕 Enable virtual scrolling mode |
+| `data` | Array | [] | 🆕 Data array (virtual mode only) |
+| `item-height` | Number | 50 | 🆕 Item height in pixels (virtual mode only) |
+| `buffer` | Number | 5 | 🆕 Buffer items count (virtual mode only) |
 
-* desc：Pixel height moved per second
-* default: 60 (px/second)
-* type: Number
+### Virtual Scrolling Mode 🆕
 
-#### reverse
+For large datasets (1000+ items), use virtual scrolling:
 
-* desc：The animation will play in reverse scrolling
-* default: false
-* type: Boolean
+```html
+<tank-seamless-scroll 
+  :virtual="true"
+  :data="bigDataList"
+  :item-height="40"
+  :step-length="100">
+  <template #item="{ item, index }">
+    <div class="row">{{ item.text }}</div>
+  </template>
+</tank-seamless-scroll>
+```
 
-#### debug
+## License
 
-* desc：Whether to display debugging information
-* default: false
-* type: Boolean
-
-#### pauseOnHover:
-
-* desc：Whether to pause when the mouse hovers
-* default: true
-* type: Boolean
+MIT

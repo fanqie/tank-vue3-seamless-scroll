@@ -1,0 +1,26 @@
+# Source control
+.git
+.gitignore
+.vscode
+.idea
+
+# Dependencies
+node_modules
+
+# Build artifacts (demo site)
+dist
+dist-ssr
+
+# Project config
+vite.config.js
+index.html
+public
+
+# Demo/Examples
+src/examples
+src/components
+src/App.vue
+src/main.js
+src/assets
+src/virtual.vue
+example

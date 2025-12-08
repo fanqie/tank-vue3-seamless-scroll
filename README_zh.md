@@ -2,27 +2,31 @@
 
 # tank-vue3-seamless-scroll
 
-## features
+> **2.0 版本** - 现在使用 CSS Keyframes 驱动！🚀
 
-* 这是一个高性能的无缝滚动插件
-* 事件监听不会失效
+## V2.0 新特性
 
-## 警告
+- ✅ **CSS 原生动画**：丝滑流畅的滚动体验
+- ✅ **虚拟滚动**：轻松处理 10万+ 数据
+- ✅ **GPU 加速**：硬件加速变换
+- ✅ **零依赖**：无需外部库
+- ✅ **100% API 兼容**：无缝替换 v1.x
+- ✅ **智能渲染**：使用 `content-visibility` 仅渲染可见内容
 
-如果您打算对大量数据使用此插件，我们未做任何vue第三方组件针对性内存、cpu的虚拟优化，请谨慎选择
+## 功能特性
+
+* 🎯 高性能无缝滚动
+* 🔄 无限循环动画
+* ⏸️ 悬停暂停
+* 🔃 反向滚动支持
+* 📊 海量数据虚拟滚动
+* 🐛 内置调试模式
 
 ## 运行环境
 
-* vue3
-* nodejs 14.15.0+
-
-# 预览
-
-点击图片播放动画
-
-[![demo](./demo.jpg)](https://user-images.githubusercontent.com/466966/233253193-66d316da-3803-41dc-b115-3d74ec2b8d8d.mp4)
-
-[在线演示](https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html)
+* Vue 3.x
+* Node.js 14.15.0+
+* 支持 CSS Keyframes 的现代浏览器
 
 ## 快速开始
 
@@ -51,28 +55,35 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 </div>
 ```
 
-### api
+### API 参考
 
-#### step-length
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|---------|-------------|
+| `step-length` | Number | 60 | 滚动速度，每秒像素 |
+| `reverse` | Boolean | false | 反向滚动 |
+| `debug` | Boolean | false | 显示调试信息 |
+| `pauseOnHover` | Boolean | true | 鼠标悬停时暂停 |
+| `virtual` | Boolean | false | 🆕 启用虚拟滚动模式 |
+| `data` | Array | [] | 🆕 数据数组（仅虚拟模式） |
+| `item-height` | Number | 50 | 🆕 每项高度（仅虚拟模式） |
+| `buffer` | Number | 5 | 🆕 缓冲区项目数（仅虚拟模式） |
 
-* 描述：每秒移动像素高度
-* 默认值: 60 (px/秒)
-* 类型: Number
+### 虚拟滚动模式 🆕
 
-#### reverse
+对于大数据量（1000+ 条），使用虚拟滚动：
 
-* 描述：动画将反向滚动播放
-* 默认值: false
-* 类型: Boolean
+```html
+<tank-seamless-scroll 
+  :virtual="true"
+  :data="bigDataList"
+  :item-height="40"
+  :step-length="100">
+  <template #item="{ item, index }">
+    <div class="row">{{ item.text }}</div>
+  </template>
+</tank-seamless-scroll>
+```
 
-#### debug
+## 许可证
 
-* 描述：是否显示调试信息
-* 默认值: false
-* 类型: Boolean
-
-#### pauseOnHover:
-
-* desc：鼠标悬停时是否暂停
-* default: true
-* type: Boolean
+MIT
