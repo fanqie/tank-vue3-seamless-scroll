@@ -1,12 +1,13 @@
 {
   "name": "tank-vue3-seamless-scroll",
   "private": false,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "main": "index.js",
   "engines": {
     "node": ">=14.0.0"
   },
+  "homepage": "https://fanqie.github.io/tank-vue3-seamless-scroll/dist/index.html",
   "repository": {
     "url": "https://github.com/curry-trooper/tank-vue3-seamless-scroll"
   },
