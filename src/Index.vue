@@ -11,7 +11,8 @@
       <div>dir:{{ prop.reverse ? 'reverse' : 'normal' }} | status:{{ isPaused ? 'paused' : 'running' }}</div>
       <div>contentH:{{ contentHeight }}px | fps:{{ currentFps }}</div>
       <div v-if="prop.virtual">visible:{{ visibleRange.start }}-{{ visibleRange.end }}/{{ prop.data.length }}</div>
-      <div v-else>copies:{{ copyCount }}</div>
+      <div v-else>copies:{{ copyCount }} | items:{{ itemCount }}</div>
+      <div v-if="prop.autoScrollThreshold > 0">threshold:{{ prop.autoScrollThreshold }} | scrolling:{{ shouldScroll ? 'yes' : 'no' }}</div>
     </div>
     
     <!-- 虚拟滚动模式 -->
@@ -99,6 +100,11 @@ const prop = defineProps({
   buffer: {
     type: Number,
     default: 5
+  },
+  // 自动滚动阈值：数据行数大于该值时自动开启滚动，否则不滚动
+  autoScrollThreshold: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -115,6 +121,7 @@ const isPaused = ref(false)
 const currentFps = ref(60)
 const isReady = ref(false)
 const copyCount = ref(2)
+const itemCount = ref(0)
 
 // 虚拟滚动状态
 const scrollOffset = ref(0)
@@ -148,6 +155,13 @@ const containerStyle = computed(() => ({
 }))
 
 const wrapClass = computed(() => {
+  // 如果设置了自动滚动阈值且数据量不足，则不启用滚动
+  if (prop.autoScrollThreshold > 0) {
+    const count = prop.virtual ? prop.data.length : itemCount.value
+    if (count < prop.autoScrollThreshold) {
+      return {}
+    }
+  }
   // 虚拟模式不使用CSS动画，用JS控制
   if (prop.virtual) {
     return {
@@ -159,6 +173,12 @@ const wrapClass = computed(() => {
     'warp-paused': isPaused.value && prop.pauseOnHover,
     'warp-reverse': prop.reverse
   }
+})
+
+const shouldScroll = computed(() => {
+  if (prop.autoScrollThreshold <= 0) return true
+  const count = prop.virtual ? prop.data.length : itemCount.value
+  return count >= prop.autoScrollThreshold
 })
 
 const wrapStyle = computed(() => {
@@ -237,6 +257,15 @@ const updateVisibleRange = () => {
     virtualRafId = requestAnimationFrame(updateVisibleRange)
     return
   }
+  // 如果设置了自动滚动阈值且数据量不足，则不滚动
+  if (!shouldScroll.value) {
+    scrollOffset.value = 0
+    visibleRange.value = {
+      start: 0,
+      end: Math.min(prop.data.length, Math.ceil(parentHeight.value / prop.itemHeight) + prop.buffer * 2)
+    }
+    return
+  }
   
   const totalHeight = virtualTotalHeight.value
   if (totalHeight <= 0) return
@@ -299,6 +328,13 @@ const updateMeasurements = () => {
       const needed = Math.ceil(pHeight / singleHeight) + 1
       copyCount.value = Math.max(2, needed)
       animationDuration.value = calculateDuration()
+      
+      // 计算子元素数量（用于自动滚动阈值判断）
+      const slotContent = ref_warpLine.value
+      if (slotContent) {
+        itemCount.value = slotContent.children.length
+      }
+      
       isReady.value = true
     }
   }

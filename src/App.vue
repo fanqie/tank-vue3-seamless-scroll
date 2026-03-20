@@ -5,6 +5,7 @@ import Example2 from './examples/example2.vue'
 import Example3 from './examples/example3.vue'
 import ExampleVirtual from './examples/example-virtual.vue'
 import ExampleComplex from './examples/example-complex.vue'
+import ExampleAutoScroll from './examples/example-auto-scroll.vue'
 import Doc from './examples/Doc.vue'
 
 // 一级导航
@@ -21,6 +22,7 @@ const exampleTabs = [
   { key: 'debug', label: 'Debug Mode', component: Example2, props: { stepLength:15, debug:true, height:200, title:'Debug Mode' } },
   { key: 'multi', label: 'Multi Row', component: Example3, props: { stepLength:200, debug:false, height:200, title:'Multi Row' } },
   { key: 'dynamic', label: 'Dynamic Append', component: Example1, props: { stepLength:120, debug:false, height:200, title:'Dynamic Append' } },
+  { key: 'autoScroll', label: 'Auto Threshold', component: ExampleAutoScroll, props: { height:280, title:'Auto Scroll Threshold' } },
   { key: 'virtual', label: 'Virtual (100K)', component: ExampleVirtual, props: { stepLength:1000, debug:true, height:200, count:100000, title:'Virtual (100K)' } },
   { key: 'complex', label: 'Complex (5K)', component: ExampleComplex, props: { stepLength:120, debug:true, reverse:true, height:200, count:5000, title:'Complex (5K)' } }
 ]
