@@ -67,6 +67,7 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 | `data` | Array | [] | 🆕 数据数组（仅虚拟模式） |
 | `item-height` | Number | 50 | 🆕 每项高度（仅虚拟模式） |
 | `buffer` | Number | 5 | 🆕 缓冲区项目数（仅虚拟模式） |
+| `auto-scroll-threshold` | Number | 0 | 🆕 自动滚动阈值 - 数据行数大于等于该值时自动开启滚动 |
 
 ### 虚拟滚动模式 🆕
 
@@ -83,6 +84,20 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
   </template>
 </tank-seamless-scroll>
 ```
+
+### 自动滚动阈值 🆕
+
+根据数据行数自动开启/关闭滚动：
+
+```html
+<tank-seamless-scroll 
+  :auto-scroll-threshold="5"
+  :step-length="100">
+  <div v-for="item in items" :key="item.id" class="row">{{ item.text }}</div>
+</tank-seamless-scroll>
+```
+
+当 `items.length < 5` 时，滚动禁用。当 `items.length >= 5` 时，滚动自动开启。这对于动态列表非常有用，只在内容足够多时才启用滚动。
 
 ## 许可证
 

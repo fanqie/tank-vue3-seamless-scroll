@@ -67,6 +67,7 @@ import TankSeamlessScroll from "tank-vue3-seamless-scroll"
 | `data` | Array | [] | 🆕 Data array (virtual mode only) |
 | `item-height` | Number | 50 | 🆕 Item height in pixels (virtual mode only) |
 | `buffer` | Number | 5 | 🆕 Buffer items count (virtual mode only) |
+| `auto-scroll-threshold` | Number | 0 | 🆕 Auto scroll threshold - scroll only when item count >= this value |
 
 ### Virtual Scrolling Mode 🆕
 
@@ -83,6 +84,20 @@ For large datasets (1000+ items), use virtual scrolling:
   </template>
 </tank-seamless-scroll>
 ```
+
+### Auto Scroll Threshold 🆕
+
+Automatically enable/disable scrolling based on item count:
+
+```html
+<tank-seamless-scroll 
+  :auto-scroll-threshold="5"
+  :step-length="100">
+  <div v-for="item in items" :key="item.id" class="row">{{ item.text }}</div>
+</tank-seamless-scroll>
+```
+
+When `items.length < 5`, scrolling is disabled. When `items.length >= 5`, scrolling starts automatically. This is useful for dynamic lists where you want scrolling only when there's enough content.
 
 ## License
 

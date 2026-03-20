@@ -44,6 +44,12 @@
       <p class="text-secondary">For large datasets (1000+ items), use virtual scrolling:</p>
       <code-show :code="codeVirtual" />
     </div>
+
+    <div class="section">
+      <h3>Auto Scroll Threshold <span class="badge bg-success">New</span></h3>
+      <p class="text-secondary">Automatically enable/disable scrolling based on item count:</p>
+      <code-show :code="codeAutoScroll" />
+    </div>
   </div>
 </template>
 
@@ -72,6 +78,14 @@ const codeVirtual = `<tank-seamless-scroll
   </template>
 </tank-seamless-scroll>`
 
+const codeAutoScroll = `<tank-seamless-scroll 
+  :auto-scroll-threshold="5"
+  :step-length="100">
+  <div v-for="item in items" :key="item.id">{{ item.text }}</div>
+</tank-seamless-scroll>
+
+<!-- When items.length >= 5, scrolling starts automatically -->`
+
 const apiRows = [
   { prop: 'step-length', type: 'Number', default: '60', desc: 'Scroll speed in pixels per second' },
   { prop: 'reverse', type: 'Boolean', default: 'false', desc: 'Reverse scrolling direction' },
@@ -81,6 +95,7 @@ const apiRows = [
   { prop: 'data', type: 'Array', default: '[]', desc: '🆕 Data array (virtual mode only)' },
   { prop: 'item-height', type: 'Number', default: '50', desc: '🆕 Item height in pixels (virtual mode only)' },
   { prop: 'buffer', type: 'Number', default: '5', desc: '🆕 Buffer items count (virtual mode only)' },
+  { prop: 'auto-scroll-threshold', type: 'Number', default: '0', desc: '🆕 Auto scroll threshold - scroll when items >= this value' },
 ]
 </script>
 
